@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom"
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Redirect, withRouter, Link} from "react-router-dom"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import News from './News'
 import HeaderMenu from './HeaderMenu'
@@ -7,6 +7,7 @@ import Footer from './Footer'
 import FullNews from './SingleNewsInfo'
 import Register from './Register'
 import Login from './Login'
+import Lk from './Lk'
 import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -135,13 +136,16 @@ function GetNews(props) {
   )
 }
 
+
 function App() {
+
   return (
     <Router>
       <Route path="/" exact component={Index} />
       <Route path="/news/:id" component={FullNews} />
       <Route path="/registration/" component={Register} />
-      <Route path="/login/" component={Login} />
+      <Route path="/login/" render={() => document.cookie.isLogin ? (<Redirect to="/lk"/>) : (<Login/>)}/>
+      <Route path="/lk/" component={Lk} />
     </Router>
   );
 }
