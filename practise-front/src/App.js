@@ -4,6 +4,7 @@ import LoginContext from './context/login'
 import Login from './Login'
 import Lk from './Lk'
 import Home from './Home'
+import List from './List'
 import './App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       }}>
       <Router>
         <Route path="/" exact component={Home} />
+        <Route path="/list" exact component={List}/>
         <Route path="/login" render={() => isLogin ? (<Redirect to="/lk" />) : (<Login handleLoginChange={handleLoginChange} />)} />
         <Route path="/lk" render={() => isLogin ? (<Lk/>) : (<Redirect to="/login" />)} />
       </Router>
@@ -64,6 +66,7 @@ function CheckSessionKey(props) {
 
 function getCookie(name) {
   let matches = document.cookie.match(new RegExp(
+    // eslint-disable-next-line no-useless-escape
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;

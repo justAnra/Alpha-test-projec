@@ -4,6 +4,7 @@ import { Container, Button, Typography } from '@material-ui/core';
 import { Link } from "react-router-dom"
 import AccountBox from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
+import ListIcon from '@material-ui/icons/List';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import LoginContext from './context/login';
@@ -42,12 +43,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         root: {
             'padding-top': '20px',
-            'margin-bottom': '20px',
+            'margin-bottom': '40px',
             flexGrow: 1,
             background: 'inherit',
         },
         menu: {
-            padding: theme.spacing(1),
+            padding: theme.spacing(2),
             textAlign: 'center',
             display: 'flex',
             color: theme.palette.text.secondary,
@@ -56,13 +57,16 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         icon: {
-            'margin-left': '10px',
+            'margin-right': '10px',
             'font-size': '1.3rem'
         },
         authMenu: {
             display: 'contents',
+            padding: 0,
         },
-
+        buttonLayout: {
+            padding: 0,
+        },
     })
 );
 
@@ -79,11 +83,18 @@ export default function HeaderMenu(props) {
 function MainMenuItems() {
     const classes = useStyles()
     return (
-        <Button>
-            <Link className={classes.menu} to="/">
-                <Typography variant="h8">Главная</Typography><HomeIcon className={classes.icon} />
-            </Link>
-        </Button>
+        <Container style={{ display: 'contents' }}>
+            <Button className={classes.buttonLayout}>
+                <Link className={classes.menu} to="/">
+                    <HomeIcon className={classes.icon} /><Typography variant="subtitle2">Главная</Typography>
+                </Link>
+            </Button>
+            <Button className={classes.buttonLayout}>
+                <Link className={classes.menu} to="/list">
+                    <ListIcon className={classes.icon} /><Typography variant="subtitle2">Книги</Typography>
+                </Link>
+            </Button>
+        </Container>
     )
 }
 
@@ -97,36 +108,27 @@ function AuthenticationItems(props) {
                     <Button className={classes.auth}
                         onClick={() => {
                             value.changeLoginState(false)
-                            document.cookie=`sessionKey=null`
+                            document.cookie = `sessionKey=null`
                         }
                         }>
                         <Link className={classes.menu} href="/login" variant="body2">
-                            <Typography variant="h8">Выход</Typography><ExitToApp className={classes.icon} />
+                            <ExitToApp className={classes.icon} /><Typography variant="subtitle2">Выход</Typography>
                         </Link>
                     </Button >
                     <Button className={classes.auth} >
                         <Link className={classes.menu} to="/lk" variant="body2">
-                            <Typography variant="h8">{value.username}</Typography><AccountCircle className={classes.icon} />
+                            <AccountCircle className={classes.icon} /><Typography variant="subtitle2">{value.username}</Typography>
                         </Link>
                     </Button>
                 </Container>
             ) : (
-                <Button className={classes.auth} >
-                    <Link className={classes.menu} to='/login'>
-                        <Typography variant="h8">Вход</Typography><AccountBox className={classes.icon} />
-                    </Link>
-                </Button>
+                    <Button className={`${classes.auth} ${classes.buttonLayout}`} >
+                        <Link className={classes.menu} to='/login'>
+                            <AccountBox className={classes.icon} /><Typography variant="subtitle2">Вход</Typography>
+                        </Link>
+                    </Button>
             )}
     </LoginContext.Consumer>
     )
 
 }
-
-/*
-        <div className={classes.header}>
-            <a href={'/'} className={classes["menu-item"]}>Главная</a>
-            <div className={classes.auth}>
-                <a href={'/login'} className={classes["menu-item"]}>Войти</a>
-            </div>
-        </div>
-*/
