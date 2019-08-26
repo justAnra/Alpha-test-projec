@@ -15,9 +15,14 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme: Theme) => ({
     '@keyframes hoverBook': {
-        from: {
-            boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)'},
-        to: { boxShadow: '0px 10px 20px 9px rgba(0,0,0,0.2)' }
+        '0%': {
+            boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)',
+            transform: 'scale(1)'
+        },
+        '100%': {
+            boxShadow: '0px 9px 15px 0px rgba(0, 0, 0, 0.2)',
+            transform: 'scale(1.01)'
+        }
     },
     book: {
         flexGrow: 1,
@@ -25,19 +30,23 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: theme.spacing(1),
         '&:hover .rating': {
             display: 'flex',
-        }
-
+        },
     },
     paper: {
         padding: theme.spacing(1),
         margin: 'auto',
         maxWidth: 800,
         minWidth: 400,
+        '&:hover': {
+            animation: '$hoverBook 0.05s normal ease-in-out',
+            boxShadow: '0px 9px 15px 0px rgba(0, 0, 0, 0.2)',
+            transform: 'scale(1.01)'
+        }
     },
     image: {
         height: 220,
         width: 165,
-        
+
     },
     img: {
         margin: 'auto',
@@ -45,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         maxWidth: '100%',
         maxHeight: '100%',
         height: 'fit-content',
-        
+
     },
     rating: {
         position: 'absolute',
