@@ -1,7 +1,7 @@
 import React, { } from 'react';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import HeaderMenu from './HeaderMenu'
-import Book from './Book'
+import {Books as Book} from './Book'
 import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>

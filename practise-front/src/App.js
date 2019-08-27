@@ -5,6 +5,7 @@ import Login from './Login'
 import Lk from './Lk'
 import Home from './Home'
 import List from './List'
+import SingleBook from './SingleBook'
 import './App.css';
 
 function App() {
@@ -31,7 +32,9 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/list" exact component={List}/>
         <Route path="/login" render={() => isLogin ? (<Redirect to="/lk" />) : (<Login handleLoginChange={handleLoginChange} />)} />
-        <Route path="/lk" render={() => isLogin ? (<Lk/>) : (<Redirect to="/login" />)} />
+        <Route path="/lk" render={() => isLogin ? (<Lk/>) : (<Redirect to="/login" />)}/>
+        <Route path='/book/:id' component={SingleBook}/>
+        <Route path='/book/:id/edit' component={SingleBook}/>
       </Router>
     </LoginContext.Provider>
   );

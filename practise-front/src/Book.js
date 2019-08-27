@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     image: {
         height: 220,
         width: 165,
-
     },
     img: {
         margin: 'auto',
@@ -96,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
-function GetTags(props) {
+export function GetTags(props) {
     const classes = useStyles();
     const items = props.tags
     const tagList = []
@@ -108,7 +107,7 @@ function GetTags(props) {
     return tagList
 }
 
-export default function Books(props) {
+export  function Books(props) {
     const classes = useStyles();
     const book = props.bookData;
     return (
@@ -170,7 +169,7 @@ export default function Books(props) {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={5} style={{ textAlign: 'right' }}>
-                                    <Link to={''}>
+                                    <Link to={'/book/' + book.id}>
                                         <Typography gutterBottom variant="subtitle2">
                                             Подробнее <ArrowFoward style={{ fontSize: '1.0rem', verticalAlign: 'text-top' }} />
                                         </Typography>
